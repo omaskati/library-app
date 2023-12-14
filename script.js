@@ -1,6 +1,13 @@
 
 const myLibrary = [];
 const tableBody = document.querySelector("#book-list>tbody");
+const newBookBtn = document.querySelector("#new-book-btn");
+const newBookDialog = document.querySelector("#new-book-dialog");
+const closeDialogBtn = document.querySelector("#close-dialog");
+const newBookForm = document.querySelector("#new-book-dialog>form");
+const submitBookBtn = document.querySelector("#submit-book");
+const cancelBtn = document.querySelector("#cancel-book");
+
 
 function Book(title, author, numPages, isRead){
     this.title = title;
@@ -28,8 +35,24 @@ function initDefaultLibrary(){
 
 // myLibrary.forEach((book)=>{console.log(book.title)});
 
+/* Use if book should be added without updating the whole table display*/
+function displayNewBook(book){
+    let bookRow = document.createElement("tr");
+    let countCell = document.createElement("td");
+    countCell.innerText = myLibrary.length; //newbook already added to library
+    bookRow.appendChild(countCell);
+    for(let property in book){
+        if(property !== "info"){
+            let cell= document.createElement("td");
+            cell.innerText=book[property];
+            bookRow.appendChild(cell);
+        }
+    }
+    tableBody.appendChild(bookRow);
+}
 
 function populateTable(){
+    tableBody.innerHTML="";
     for(let i = 0; i< myLibrary.length; i++){
         let book = myLibrary[i];
         let bookRow = document.createElement("tr");
@@ -47,9 +70,35 @@ function populateTable(){
     }
 }
 
+function addNewBook(){
+    alert(newBookDialog.returnValue);
+    let inputs = Array.from(newBookForm.querySelectorAll("input"));
+    let book = new Book(
+        inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].checked
+    )
+    addBookToLibrary(book);
+    populateTable();
+    newBookForm.reset();
+}
+
+function cancelNewBook(){
+    newBookDialog.close();
+    newBookForm.reset();
+}
+
 /*INIT PAGE*/
 initDefaultLibrary();
 populateTable();
+newBookBtn.addEventListener("click", ()=>{
+    newBookDialog.show();
+});
+closeDialogBtn.addEventListener("click", ()=>{
+    newBookDialog.close();
+})
+newBookForm.addEventListener("submit", addNewBook);
+cancelBtn.addEventListener("click", cancelNewBook);
+
+
 
 
 
