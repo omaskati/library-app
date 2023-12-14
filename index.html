@@ -6,9 +6,22 @@
     <title>Library App - Odin Project JS</title>
     <link rel="stylesheet" href="meyer-reset.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
+    <div id="container"></div>
     <h1>Your Books</h1>
+    <table id="book-list">
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Pages</th>
+                <th scope="col">Read?</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 </body>
 </html>
