@@ -66,12 +66,18 @@ function populateTable(){
                 bookRow.appendChild(cell);
             }
         }
+        let deleteBtn = document.createElement("button");
+        deleteBtn.innerText="X";
+        deleteBtn.setAttribute("data-attribute", i);
+        deleteBtn.onclick=deleteBook;
+        let deleteCell = document.createElement("td");
+        deleteCell.appendChild(deleteBtn);
+        bookRow.appendChild(deleteCell);
         tableBody.appendChild(bookRow);
     }
 }
 
 function addNewBook(){
-    alert(newBookDialog.returnValue);
     let inputs = Array.from(newBookForm.querySelectorAll("input"));
     let book = new Book(
         inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].checked
@@ -84,6 +90,11 @@ function addNewBook(){
 function cancelNewBook(){
     newBookDialog.close();
     newBookForm.reset();
+}
+
+function deleteBook(){
+    myLibrary.splice(this.getAttribute("data-attribute"), 1);
+    populateTable();
 }
 
 /*INIT PAGE*/
