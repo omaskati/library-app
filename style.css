@@ -36,3 +36,12 @@ table {
     padding: 10px;
   }
   /*******/
+
+  table button{
+    width: 30px;
+    aspect-ratio: 1;
+
+    > img{
+      width: 100%;
+    }
+  }

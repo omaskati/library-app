@@ -67,13 +67,15 @@ function populateTable(){
             }
         }
         let deleteBtn = document.createElement("button");
+        deleteBtn.setAttribute("title", "Delete");
         deleteBtn.innerText="X";
         deleteBtn.setAttribute("data-attribute", i);
         deleteBtn.onclick=deleteBook;
 
         let readBtn = document.createElement("button");
+        readBtn.setAttribute("title", "Mark Read/Unread");
         readBtn.innerHTML= `
-        <img width="40px" src="icons/book-open-blank-variant.png">
+        <img src="icons/book-open-blank-variant.png">
         `;
         readBtn.setAttribute("data-attribute", i);
         readBtn.onclick = toggleRead;
