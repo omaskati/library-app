@@ -81,8 +81,11 @@ function populateTable(){
         readBtn.onclick = toggleRead;
 
         let actionCell = document.createElement("td");
-        actionCell.appendChild(readBtn);
-        actionCell.appendChild(deleteBtn);
+        let flexDiv = document.createElement("div");
+        flexDiv.classList.add("flex-cell");
+        flexDiv.appendChild(readBtn);
+        flexDiv.appendChild(deleteBtn);
+        actionCell.appendChild(flexDiv);
         bookRow.appendChild(actionCell);
         tableBody.appendChild(bookRow);
     }
