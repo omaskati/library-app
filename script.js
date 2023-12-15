@@ -70,9 +70,18 @@ function populateTable(){
         deleteBtn.innerText="X";
         deleteBtn.setAttribute("data-attribute", i);
         deleteBtn.onclick=deleteBook;
-        let deleteCell = document.createElement("td");
-        deleteCell.appendChild(deleteBtn);
-        bookRow.appendChild(deleteCell);
+
+        let readBtn = document.createElement("button");
+        readBtn.innerHTML= `
+        <img width="40px" src="icons/book-open-blank-variant.png">
+        `;
+        readBtn.setAttribute("data-attribute", i);
+        readBtn.onclick = toggleRead;
+
+        let actionCell = document.createElement("td");
+        actionCell.appendChild(readBtn);
+        actionCell.appendChild(deleteBtn);
+        bookRow.appendChild(actionCell);
         tableBody.appendChild(bookRow);
     }
 }
@@ -94,6 +103,12 @@ function cancelNewBook(){
 
 function deleteBook(){
     myLibrary.splice(this.getAttribute("data-attribute"), 1);
+    populateTable();
+}
+
+function toggleRead(){
+    let book = myLibrary[this.getAttribute("data-attribute")];
+    book.isRead = !book.isRead;
     populateTable();
 }
 
